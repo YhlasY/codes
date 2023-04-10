@@ -1,0 +1,31 @@
+#include "bits/stdc++.h"
+using namespace std;
+
+#define N 100005
+
+int n, a[N], per[N];
+
+bool vis[N];
+
+void f(int x) {
+    if (x == n + 1) {
+        for (int i = 1; i <= n; i++) cout << per[i] << ' ';
+        cout << "\n";
+        return;
+    }
+    for (int i = 1; i <= n; i++) {
+        if (vis[i]) continue;
+        vis[i] = true;
+        per[x] = a[i];
+        f(x + 1);
+        vis[i] = false;
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+
+    cin >> n;
+    for (int i = 1; i <= n; i++) cin >> a[i];
+    f(1);
+}

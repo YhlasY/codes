@@ -1,0 +1,41 @@
+#include "bits/stdc++.h"
+using namespace std;
+
+#define N 1003
+#define ll long long
+
+int n;
+
+bool vis[N][N];
+
+const int dx[4] = {1,0,-1,0};
+const int dy[4] = {0,1,0,-1};
+
+bool ok(int x, int y) { return x > 0 && y > 0 && x <= n && y <= n && !vis[x][y];}
+
+ll f(int x, int y, int cnt) {
+    if (x == n && y == n) return cnt == n * n;
+
+    if (!ok(x, y + 1) && !ok(x, y - 1) && ok(x - 1, y) && ok(x + 1, y)) return 0;
+    if (!ok(x + 1, y) && !ok(x - 1, y) && ok(x, y - 1) && ok(x, y + 1)) return 0;
+
+    ll res = 0;
+    vis[x][y] = true;
+    for (int i = 0; i < 4; i++) {
+        int xx = x + dx[i];
+        int yy = y + dy[i];
+        if (ok(xx, yy)) res += f(xx, yy, cnt + 1);
+    }
+
+    vis[x][y] = false;
+    return res;
+}
+
+int main() {
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+
+    cin >> n;
+    if (n == 1) return cout << 1, 0;
+    vis[1][1] = true;
+    cout << f(2, 1, 2) * 2;
+}

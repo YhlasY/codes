@@ -1,3 +1,4 @@
+//generating all permutations of a set of n elements.
 #include "bits/stdc++.h"
 using namespace std;
 

@@ -1,3 +1,4 @@
+//problem of calculating the number of paths in an n × n grid from the upper-left corner to the lower-right corner such that the path visits each square exactly once
 #include "bits/stdc++.h"
 using namespace std;
 

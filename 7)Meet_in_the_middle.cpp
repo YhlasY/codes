@@ -1,0 +1,62 @@
+//given a list of n numbers and a number x, and find out if it is possible to choose some numbers from the list so that their sum is x.
+#include "bits/stdc++.h"
+using namespace std;
+
+#define N 102
+#define ll long long
+
+ll k, n, m, st[N], st1[N], ss, sk;
+
+int main()
+{
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+
+    cin >> n >> k;
+    m = (n + 1) / 2; n /= 2;
+    for (int i = 0; i < n; i++) cin >> st[1<<i];
+
+    for (int i = 0; i < m; i++) cin >> st1[1<<i];
+
+    for (int i = 1; i < (1<<n); i++){
+        ss = i & -i;
+        sk = i - ss;
+        st[i] = st[ss] + st[sk];
+    }
+
+    for (int i = 1; i < (1<<m); i++){
+        ss = i & -i;
+        sk = i - ss;
+        st1[i] = st1[ss] + st1[sk];
+    }
+
+    sort (st + 1, st + (1<<n));
+    sort (st1 + 1, st1 + (1<<m));
+
+    int l = 1, r = (1<<n) - 1;
+    while (l <= r){
+        int md = (l + r) / 2;
+        if (st[md] == k) return cout << "YES\n", 0;
+        if (st[md] < k) l = md + 1;
+        else r = md - 1;
+    }
+
+    l = 1; r = (1<<m) - 1;
+    while (l <= r){
+        int md = (l + r) / 2;
+        if (st1[md] == k) return cout << "YES\n", 0;
+        if (st1[md] < k) l = md + 1;
+        else r = md - 1;
+    }
+
+    for (int i = 1; i < (1<<n); i++){
+        l = 1; r = (1<<m) - 1;
+        while (l <= r){
+            int md = (l + r) / 2;
+            if (k - st[i] == st1[md]) return cout << "YES", 0;
+            if (k - st[i] < st1[md]) r = md - 1;
+            else l = md + 1;
+        }
+    }
+
+    cout << "NO";
+}

@@ -28,4 +28,6 @@ int main() {
     cin >> n;
     for (int i = 1; i <= n; i++) cin >> a[i];
     f(1);
+    
+    //Time complexity is O(pow(2, n) * n(for printing))
 }

@@ -1,0 +1,24 @@
+//find the sum of path from the upper-left corner to the lower-right corner of an n × n grid, such that we only move down and right. Each square
+//contains a positive integer, and the path should be constructed so that the sum of the values along the path is as large as possible.
+#include "bits/stdc++.h"
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+
+    int n;              //n is size of grid
+    cin >> n;
+    vector <vector<int>> a(n + 1, vector<int>(n + 1, 0)); //we can use a[n + 1][n + 1]
+    for (int i = 1; i <= n; i++){
+        for (int j = 1; j <= n; j++) cin >> a[i][j];
+    }
+
+    vector <vector<int>> dp(n + 1, vector<int>(n + 1, 0)); //we can use dp[n + 1][n + 1] but after we have to fill 0s the dp matrix
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + a[i][j];       //we can only come to (i, j) from (i - 1, j) and (i, j - 1)
+        }
+    }
+
+    cout << dp[n][n];
+}

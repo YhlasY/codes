@@ -1,0 +1,26 @@
+//given a list of weights [w1,w2,...,wn], determine can m sum be constructed using the weights.
+//we can use the weights at most one
+#include "bits/stdc++.h"
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+
+    int n, w;
+    cin >> n >> w;                   //n is size of the array, determine can m sum be constructed using the weights
+    vector <int> a(n + 1, 0);   //we can use a[n + 1]
+    for (int i = 1; i <= n; i++) cin >> a[i];
+
+    vector <bool> dp(w + 1, false);   //we can use dp[n + 1] but after zat we mus fill with 0s the dp array
+    dp[0] = true;                           //dp[0] can be constructed when we don't use any weights
+    for (int i = 1; i <= n; i++) {
+        for (int j = w; j >= 0; j--) {                         //we have to do it reverse order for using each coin at most once in the sum
+            if (dp[j] && j + a[i] <= w) dp[j + a[i]] = true;   //if we can obtain j sum we can also obtain j + a[i] sum
+        }
+    }
+
+    if (dp[w]) cout << "YES";
+    else cout << "NO";
+
+    //Time complexity is O(n * w)
+}

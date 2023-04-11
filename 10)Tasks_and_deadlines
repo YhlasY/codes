@@ -1,0 +1,24 @@
+//we are given n tasks with durations and deadlines and our task is to choose an order to perform the tasks.
+//For each task, we earn d − x points where d is the task’s deadline and x is the moment when we
+//finish the task. What is the largest possible total score we can obtain? (Greedy)
+#include "bits/stdc++.h"
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+
+    int n;
+    cin >> n;
+    pair <int, int> p[n + 1];
+    for (int i = 1; i <= n; i++) {
+        cin >> p[i].first >> p[i].second; //p[i].first is duration, p[i].second is deadline
+    }
+    sort(p + 1, p + n + 1);
+
+    int end = 0, ans = 0;
+    for (int i = 1; i <= n; i++) {
+        end += p[i].first;
+        ans += p[i].second - end;
+    }
+    cout << ans;
+}

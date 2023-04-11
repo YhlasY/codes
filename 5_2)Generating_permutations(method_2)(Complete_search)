@@ -16,5 +16,5 @@ int main() {
         cout << "\n";
     }while(next_permutation(a + 1, a + n + 1));
     
-    //Time complexity is O(n!)
+    //Time complexity is O(n! * n)
 }

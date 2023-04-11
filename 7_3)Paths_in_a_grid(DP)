@@ -21,4 +21,6 @@ int main() {
     }
 
     cout << dp[n][n];
+
+    //Time complexity is O(n * n)
 }

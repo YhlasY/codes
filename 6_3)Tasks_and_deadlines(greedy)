@@ -21,4 +21,6 @@ int main() {
         ans += p[i].second - end;
     }
     cout << ans;
+    
+    //Time complexity is O(n * log(n))
 }

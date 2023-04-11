@@ -59,4 +59,6 @@ int main()
     }
 
     cout << "NO";
+    
+    //Time complexity is O(pow(2, n - 1) * log(pow(2, n - 1)))
 }

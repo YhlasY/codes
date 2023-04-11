@@ -7,11 +7,11 @@ int main() {
     ios::sync_with_stdio(false); cin.tie(nullptr);
 
     int n, w;
-    cin >> n >> w;                   //n is size of the array, determine can m sum be constructed using the weights
-    vector <int> a(n + 1, 0);   //we can use a[n + 1]
+    cin >> n >> w;                           //n is size of the array, determine can m sum be constructed using the weights
+    vector <int> a(n + 1, 0);                //we can use a[n + 1]
     for (int i = 1; i <= n; i++) cin >> a[i];
 
-    vector <bool> dp(w + 1, false);   //we can use dp[n + 1] but after zat we mus fill with 0s the dp array
+    vector <bool> dp(w + 1, false);         //we can use dp[n + 1] but after zat we mus fill with 0s the dp array
     dp[0] = true;                           //dp[0] can be constructed when we don't use any weights
     for (int i = 1; i <= n; i++) {
         for (int j = w; j >= 0; j--) {                         //we have to do it reverse order for using each coin at most once in the sum

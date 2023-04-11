@@ -38,4 +38,7 @@ int main() {
     cin >> n;
     f(1);
     cout << "count : " << cnt;
+    
+    //Time complexity for count is O(pow(2, n)
+    //Time complexity for print matrixes is O(pow(2, n) * n * n)
 }

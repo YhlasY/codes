@@ -1,0 +1,27 @@
+//we are given a set of coins and our task is to form a sum of money n using the coins
+//each coin can be used as many times we want
+//this greedy works only if the coins are euro coins
+#include "bits/stdc++.h"
+using namespace std;
+
+#define ll long long
+
+int main() {
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+
+    int n, x;
+    cin >> n >> x;
+    vector <int> a(n + 1, 0);
+    for (int i = 1; i <= n; i++) cin >> a[i];
+
+    sort(a.begin(), a.end());
+
+    int ans = 0;
+    for (int i = n; i > 0; i--) {
+        int cnt = x / a[i];
+        x -= cnt * a[i];
+        ans += cnt;
+    }
+
+    cout << ans;
+}

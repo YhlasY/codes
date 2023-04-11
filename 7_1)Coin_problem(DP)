@@ -26,4 +26,6 @@ int main() {
 
     if (dp[n] == 1e18) cout << "IMPOSSIBLE";
     else cout << dp[n];
+    
+    //Time complexity is O(n * k)
 }

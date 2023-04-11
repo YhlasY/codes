@@ -15,4 +15,6 @@ int main() {
         for (int i = 1; i <= n; i++) cout << a[i] << ' ';
         cout << "\n";
     }while(next_permutation(a + 1, a + n + 1));
+    
+    //Time complexity is O(n!)
 }

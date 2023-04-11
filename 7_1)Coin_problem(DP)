@@ -1,0 +1,29 @@
+//Given a set of coin values coins = {c1, c2,..., ck} and a target sum of money n,
+//our task is to form the sum n using as few coins as possible.
+#include "bits/stdc++.h"
+using namespace std;
+
+#define ll long long
+
+int main() {
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+
+    ll n, k;
+    cin >> n >> k;                             //n is target sum, k is number of coins
+    vector <ll> a(k + 1, 0);
+    for (int i = 1; i <= k; i++) cin >> a[i];
+
+    vector <ll> dp(n + 1, 1e18);               //dp[i] equal to form the sum i using as few coins as possible, initial dp[i] equal to INF
+    dp[0] = 0;                                 //dp[0] = 0, because no coins are need to form an empty sum
+    for (int i = 1; i <= n; i++) {
+        //calculate dp[i]
+        for (int j = 1; j <= k; j++) {
+            if (i - a[j] >= 0) {
+                dp[i] = min(dp[i], dp[i - a[j]] + 1); //sum i can be formed by minimum need coins to from i - a[j](dp[i - a[j]) and a[j](1)
+            }
+        }
+    }
+
+    if (dp[n] == 1e18) cout << "IMPOSSIBLE";
+    else cout << dp[n];
+}

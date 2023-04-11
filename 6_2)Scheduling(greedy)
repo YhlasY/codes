@@ -22,4 +22,6 @@ int main() {
     }
 
     for (auto i : ans) cout << a[i].second << ' ' << a[i].first << "\n";
+    
+    //Time complexity is O(n * log(n))
 }

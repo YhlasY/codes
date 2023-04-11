@@ -1,0 +1,31 @@
+//LIS = longest increasing subsequence
+//find the length of LIS in an array of n elements.
+#include "bits/stdc++.h"
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+
+    int n;
+    cin >> n;                                  //length of the array
+    vector <int> a(n + 1, 0);
+    for (int i = 1; i <= n; i++) cin >> a[i];
+
+    vector <int> dp(n + 1, 1);                 //dp[i] is the length of LIS which you can use only numbers a[1...i] and last element of subsequence is a[i]
+                                               //initial all of them 1 because {a[i]} is increasing subsequence
+    for (int i = 1; i <= n; i++) {
+        //calculate dp[i]
+        for (int j = 1; j <= i; j++) {        //use only numbers a[1...i]
+            if (a[j] < a[i]) {
+                dp[i] = max(dp[i], dp[j] + 1/*length of LIS of a[1...j](dp[j]) + a[i](1)*/);
+                //last element of LIS of a[1...j] is a[j] so we can add a[i] to the subsequence, since a[j] < a[i] it'll increasing subsequence
+            }
+        }
+    }
+
+    int ans = 0;
+    for (int i = 1; i <= n; i++) {
+        ans = max(ans, dp[i]);
+    }
+    cout << ans;
+}

@@ -1,0 +1,35 @@
+#include "bits/stdc++.h"
+using namespace std;
+
+#define ll long long
+#define int ll
+
+int32_t main() {
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+
+    int n, m;
+    cin >> n >> m;
+    vector <vector<int>> dis(n + 1, vector<int>(n + 1, 1e18));
+    while (m--) {
+        int u, v, d;
+        cin >> u >> v >> d;
+        dis[u][v] = d;
+        dis[v][u] = d;
+    }
+    for (int i = 1; i <= n; i++) dis[i][i] = 0;
+    for (int k = 1; k <= n; k++) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                dis[i][j] = min(dis[i][j], dis[i][k] + dis[k][j]);
+            }
+        }
+    }
+
+    int q;
+    cin >> q;
+    while (q--) {
+        int u, v;
+        cin >> u >> v;
+        cout << dis[u][v] << "\n";
+    }
+}

@@ -1,0 +1,32 @@
+#include "bits/stdc++.h"
+using namespace std;
+
+#define ll long long
+#define int ll
+
+struct edge{
+    int u;
+    int v;
+    int d;
+};
+
+int32_t main() {
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+
+    int n, m, s, t;
+    cin >> n >> m >> s >> t;
+
+    edge E[m + 1];
+    for (int i = 1; i <= m; i++) cin >> E[i].u >> E[i].v >> E[i].d;
+
+    vector <int> dis(n + 1, 1e18);
+    dis[s] = 0;
+    for (int i = 1; i < n; i++) {
+        for (int j = 1; j <= m; j++) {
+            if (dis[E[j].u] < 1e18) dis[E[j].v] = min(dis[E[j].v], dis[E[j].u] + E[j].d);
+            if (dis[E[j].v] < 1e18) dis[E[j].u] = min(dis[E[j].u], dis[E[j].v] + E[j].d); //why??????????
+        }
+    }
+
+    cout << dis[t];
+}

@@ -43,7 +43,7 @@ int main() {
 
     sort(E.begin(), E.end(), den);
 
-    int sm = 0;
+    long long sm = 0;
     for (auto i : E) {
         int x = ata(i.s);
         int y = ata(i.t);

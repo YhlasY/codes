@@ -1,0 +1,55 @@
+#include "bits/stdc++.h"
+using namespace std;
+
+vector <int> p, sz;
+
+struct node{
+    int d;
+    int s;
+    int t;
+};
+
+bool den(node a, node b) {
+    return a.d < b.d;
+}
+
+int ata(int x) {
+    if (p[x] == x) return x;
+    return p[x] = ata(p[x]);
+}
+
+void uni(int u, int v) {
+    int x = ata(u);
+    int y = ata(v);
+    if (x == y) return;
+    if (sz[x] < sz[y]) swap(x, y);
+    p[y] = p[x];
+    sz[x] += sz[y]; sz[y] = 0;
+}
+
+int main() {
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+
+    int n, m;
+    cin >> n >> m;
+    p.resize(n + 1, 0); sz.resize(n + 1, 1);
+    for (int i = 1; i <= n; i++) p[i] = i;
+    vector <node> E;
+    while (m--) {
+        int u, v, d;
+        cin >> u >> v >> d;
+        E.push_back({d, u, v});
+    }
+
+    sort(E.begin(), E.end(), den);
+
+    int sm = 0;
+    for (auto i : E) {
+        int x = ata(i.s);
+        int y = ata(i.t);
+        if (x == y) continue;
+        uni(x, y);
+        sm += i.d;
+    }
+    cout << sm;
+}
